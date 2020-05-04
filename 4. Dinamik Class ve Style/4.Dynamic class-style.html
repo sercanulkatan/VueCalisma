@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" type="text/javascript"></script>
+	<style>
+		.box{
+			width:100px;
+			height:100px;
+			background-color:gray;
+			display: inline-block;
+			margin-right: 5px
+		}
+		.dark-red{
+			background-color: darkred;
+		}
+		.blue{
+			background-color: blue;
+		}
+		.dark-green{
+			background-color: darkgreen;
+		}
+	</style>
+  </head>
+  <body>
+    <div id="app">
+	<p>bind class: class a vue ile ekleme</p>
+		<div @click="attached=!attached" :class="divClass" class="box"></div>
+		<div class="box" :class="{ 'dark-red' : this.attached }"></div>
+		<!-- Ya koşul yada attribute -->
+		<div class="box" :class="[clr,{ 'dark-red' : this.attached }]" ></div>
+		<hr/>
+		<input type="text" v-model="clr" />
+		
+		<hr/>
+		<hr/>
+		
+		<div class="box" :style="{ 'background-color': clr2 }"></div>
+		<div class="box" :style="divStyle"></div>
+		<div class="box" :style="[divStyle, {width: height+'px'}]" ></div>
+		<hr/>
+		<input type="text" v-model="clr2" />
+		<input type="text" v-model="height" />
+	</div>
+	
+	<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data: {
+			attached: false,
+			clr: "dark-green",
+			clr2: "darkred",
+			height: 100
+        },
+		computed:{
+			divClass: function(){
+				return { 
+					'dark-red' : this.attached,
+					blue : !this.attached 
+				}
+			},
+			divStyle: function(){
+				return {
+					'background-color': this.clr2,
+					'height':this.height+"px"
+				}
+			}
+		}
+    });
+    </script>
+  </body>
+</html>

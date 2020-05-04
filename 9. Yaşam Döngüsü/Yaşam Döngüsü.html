@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" type="text/javascript"></script>
+	
+  </head>
+  <body>
+    <div id="app1">
+		<p>{{title}}</p>
+		<button @click="title='başlık değiştirildi'">Değiştir</button>
+		<button @click="destroy">Destroy</button>
+		<p v-if="!isDestroyed">Destroy sonrası DOM kalır ancak bağlantı kopar artık işlem kabul etmez.</p>
+	</div>
+	
+	<script type="text/javascript">
+	
+    var vm1 = new Vue({
+		el: "#app1",
+		data: {
+			title: "Vue Yaşam Döngüsü",
+			isDestroyed: false
+		},
+		methods: {
+			destroy: function(){
+				this.isDestroyed=true;
+				this.$destroy();
+			}
+		},
+		beforeCreate: function(){
+			console.log("beforeCreate()");
+		},
+		created: function(){
+			console.log("created()");
+		},
+		beforeMount: function(){
+			console.log("beforeMount()");
+		},
+		mounted: function(){
+			console.log("mounted()");
+		},
+		beforeUpdate: function(){
+			console.log("beforeUpdate()");
+		},
+		updated: function(){
+			console.log("updated()");
+		},
+		beforeDestroy: function(){
+			console.log("beforeDestroy()");
+		},
+		destroyed: function(){
+			console.log("destroyed()");
+		}
+	});
+	
+	
+	
+	</script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="exercise">
+  <!-- 1) Butona tıklayarak <p> elementleri arasında bir Toggle İşlevi yapın. Hem v-if hem de v-show syntax'larını kullanarak bu işlemi gerçekleştiriniz. Aralarındaki farkı Öğeyi İncele diyerek bu iki syntax farkını gözlemleyiniz -->
+  <div>
+    <button @click="selected=!selected">Toggle</button>
+    <p v-if="selected">Beni Görebiliyor musun? (if)</p>
+    <p v-else-if="!selected">Ya da beni görebiliyor musun? (if)</p>
+    <p v-show="selected">Beni Görebiliyor musun? (show)</p>
+    <p v-show="!selected">Ya da beni görebiliyor musun? (show)</p>
+  </div>
+  <!-- 2) Array kullanarak bir <ul> listesi oluşturunuz. Liste içerisinde hem Array'deki verinin değerini hem de index numarasını her bir elementin içerisine yazdırınız  -->
+  <ul>
+    <li v-for="(item, index) in array">{{index}}-{{item}}</li>
+  </ul>
+  <!-- 3) Yan taraftaki objenin tüm key ve value verilerini yazdırınız: customObject: {title: 'Game of Thrones',author: 'George R.R',books: '7'}. Ayrıca tüm elementlerin index numarasını da yazdırınız. -->
+  <ul>
+    <li v-for="(value, key) in customObject">{{key}}: {{value}}</li>
+  </ul>
+  <!-- 4) Yan taraftaki objenin tüm value değerlerini yazdırınız. Ayrıca iç içe bir loop daha kurarak Array içerisindeki verileri de yazdırınız : { name: 'NesnedLoop', id: 19,data: [4.3, 2.67, 10.42, 1402] } (ipucu: v-for ve v-if Directive'lerinin beraber kullanımı bunu başarmanızı sağlayacaktır.) -->
+  <ul>
+    <li v-for="(value, key, index) in testData">{{key}}: <p v-if="index!=2">{{value}}</p>
+		<ul v-else>
+			<li v-for="item in value">{{item}}</li>
+		</ul>
+    </li>
+  </ul>
+</div>
+
+
+<script>
+new Vue({
+  el: '#exercise',
+  data: {
+    array: ['Gökhan', 'Defne', 'Berk', 'Özge'],
+    customObject: {
+      title: 'Game of Thrones',
+      author: 'George R.R',
+      books: '7'
+    },
+    testData: {
+      name: 'TESTOBJECT', 
+      id: 10,
+      data: [1.67, 1.33, 0.98, 2.21]
+    },
+	selected: true
+  }
+});
+
+</script>

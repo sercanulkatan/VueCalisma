@@ -1,0 +1,113 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<style>
+#effect {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+}
+
+.highlight {
+  background-color: red;
+  width: 200px !important;
+}
+
+.shrink {
+  background-color: gray;
+  width: 50px !important;
+}
+
+.box{
+	width: 25px !important;
+	height: 25px !important;
+	border: 1px solid black;
+}
+
+.dark-red{
+	background-color: darkred;
+}
+</style>
+
+<div id="exercise">
+  <!-- 1) Efekti Butona basarak başlatın. Efekt "highlight" ve/veya "shrink" class'ları arasında değişmelidir. Bu değişim her bir interval döngüsünde olmalıdır. ("effect" id' li div'e o anki aktif olan class eklenecektir.) -->
+  <div>
+    <button @click="startEffect">Efekti Başlat!</button>
+    <div id="effect" :class="uptClass"></div>
+  </div>
+  <!-- 2) Birkaç tane CSS Class'ı üreterek bu Class'ları Array Syntax'ı ile aşağıdaki <div>' e ekleyiniz -->
+  <div :class="['box','dark-red']" ></div>
+  <!-- 3) Örnek birkaç tane Class üreterek (Ya da ürettiklerinizi kullanarak) <input> içerisine Class adı girerek hemen alttaki <div> elementine bu yazılan Class'ı eklemeyi yapınız. -->
+  <div>
+    <input type="text" v-model="className">
+    <div :class="[className]"></div>
+  </div>
+  <!-- 4) Kullanıcının Class isimlerini girebileceği iki adet <input> elementimiz var. Bunları kullanarak hemen alttaki <div> elementinin Class'larini attached etmesini sağlayınız  -->
+  <div>
+    <input type="text" v-model="cName1">
+    <input type="text" v-Model="cName2">
+    <div :class="[cName1, cName2]"></div>
+  </div>
+  <!-- 5) 3.Uygulamayı tekrarlayın. Fakat bu sefer Class Adı yerine Denk gelecek Style Kodlarını ekleyiniz.  -->
+  <div>
+    <input type="text" v-model="style">
+    <div :style="style">AAA</div>
+  </div>
+  <!-- 6) setInterval ve Style Binding kullanarak Basit bir progress bar üretin. Progress bar' ın çalışmasını buton'a basarak başlatın. -->
+  <div>
+    <button v-on:click="startProgress">Progress İşlemini Başlat!</button>
+    <div :style="boxProg"></div>
+  </div>
+</div>
+
+
+<script>
+new Vue({
+  el: '#exercise',
+  data: {
+		effect:false,
+		count: 0,
+		className: 'box highlight',
+		cName1: 'box',
+		cName2: 'dark-red',
+		style: 'background-color: darkred',
+		rnd: 1,
+		boxProg: {
+			width: 0 +'px',
+			height:15+'px',
+			border: '1px solid #33b5e5',
+			'background-color': '#33b5e5'
+		}
+  },
+  methods: {
+    startEffect: function() {
+		var th=this;
+		setTimeout(function(){
+			th.effect=!th.effect;
+			th.startEffect();
+		},1000);
+    },
+	startProgress: function(){
+		var th=this;
+		this.rnd+= Math.floor(Math.random()*10);
+		this.rnd=this.rnd>=100?100:this.rnd;
+		setTimeout(function(){
+			th.boxProg={
+				width: th.rnd +'%',
+				height:15+'px',
+				border: '1px solid #33b5e5',
+				'background-color': '#33b5e5'
+			}
+			th.startProgress();
+		},250);
+	}
+  },
+  computed:{
+	uptClass: function(){
+		return {
+			highlight : this.effect,
+			shrink : !this.effect,
+		}
+	}
+  }
+});
+</script>

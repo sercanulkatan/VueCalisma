@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" type="text/javascript"></script>
+	
+  </head>
+  <body>
+    <div id="app">
+		<p><b>****************************************************************</b></p>
+		<p><b>v-for</b></p>
+		<p><b>****************************************************************</b></p>
+		
+		<ul>
+		<!-- key elementin satıra dair neyi sakladığını gösteririz -->
+			<li v-for="(p,index) in products" :key="p">{{index}} - {{p}}</li>
+		</ul>
+		<button @click="products.push('Hoparlör')">Ekle</button>
+		
+		
+		<div v-for="(p,index) in products">
+			<h3>{{p}}</h3>
+			<p>{{index}}</p>
+		</div>
+		
+		<p><b>****************************************************************</b></p>
+		<p><b>Template: Vue'nun sağladığı bir tag dir. Vue bunu render etmez. Bir Route elementtir.</b></p>
+		<p><b>****************************************************************</b></p>
+		<template v-for="(p,index) in products">
+			<h3>{{p}}</h3>
+			<p>{{index}}</p>
+		</template>
+		
+		<hr/>
+		
+		<ul>
+			<li v-for="p in persons">{{p.name}}</li>
+		</ul>
+		
+		<ul>
+			<li v-for="(p, index) in persons">index: {{index}}
+				<ul>
+					<li v-for="(i, key, index) in p"><strong>{{key}}:</strong> {{i}} - {{index}}</li>
+				</ul>
+			</li>
+		</ul>
+		<hr/>
+		<ul>
+			<li v-for="num in 5">{{num}}</li>
+		</ul>
+	</div>
+	
+	<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data: {
+			products: ["Klavye","Monitör","Fare","Fan"],
+			persons: [
+				{name: "Salih", mail: "syildirim@salih" },
+				{name: "Kamuran", mail: "kkar@kar" },
+				{name: "Melih", mail: "msalik@salik" },
+				{name: "Fahri", mail: "ffelaket@felaket" }
+			]
+        }
+    });
+    </script>
+  </body>
+</html>

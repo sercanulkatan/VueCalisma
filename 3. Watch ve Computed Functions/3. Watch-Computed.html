@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="app">
+		<p>Computed: Değer değişiyor ise DOM yüklenirken, çalışır yoksa çalışmaz. Senkron çalşır.</p>
+		<p>Watch: Property i izler değiştiği zaman çalışır. Asenkron çalışır.</p>
+		<button @click="counter++">Arttır</button>
+		<button @click="counter--">Azalt</button>
+		<button @click="counter2++">Arttır 2</button>
+		
+		<p>Counter: {{counter}}</p>
+		<p>Counter2: {{counter2}}</p>
+		<p>{{result()}} : {{output}}</p>
+    </div>
+	
+	<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data: {
+			name:'Sercan',
+			counter:0,
+			counter2:0
+        },
+		methods:{
+			result: function(){
+				console.log("Method çalıştı.");
+				return this.counter>10?"Sayı 10'dan büyüktür.":"Sayı 10'dan küçüktür.";
+			}
+		},
+		computed:{
+			output: function(){
+				console.log("Computed çalıştı.");
+				return this.counter>10?"Sayı 10'dan büyüktür.":"Sayı 10'dan küçüktür.";
+			}
+		},
+		watch:{
+			counter: function(value){
+				console.log("watch çalıştı.");
+				var th = this;
+				setTimeout(function(){
+					//İçerde this kullnamazsın etki alanı dışı.
+					th.counter=0;
+				},1500)
+			}
+		}
+    });
+    </script>
+  </body>
+</html>
