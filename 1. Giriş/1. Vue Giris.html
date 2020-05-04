@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{title}}</h1>
+	  
+      <hr />
+      <input type="text" v-on:input="changeDesc" value="Açıklama metni" />
+	  <!-- Data içinde ne yazıyor ise ilk halini saklar daima -->
+      <p v-once>w: v-once: {{desc1}}</p>
+	  <p>{{desc1}}</p>
+	  <hr />
+	  
+	  
+	  <p>{{descF()}}</p>
+	  <hr />
+	  
+	  
+	  <!-- Vue ya ekleyen directive v-bind -->
+	  <a v-bind:href="link">Tıkla</a>
+	  <a :href="link">Tıkla-2</a>
+	  <hr />
+	  
+	  <!-- v-link -->
+	  <p>{{link2}}</p>
+	  <p v-html="link2" ></p>
+	  <hr />
+	  
+    </div>
+	
+	<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data: {
+                title:"Vue Başlangıç",
+                desc1:"Açıklama metni",
+				link: "https://www.google.com.tr",
+				desc2:"Açıklama 2",
+				link2: "<a href='https://www.google.com.tr'>Tıkla</a>"
+        },
+        methods:{
+                changeDesc: function(evn){
+				//var olan datayı kullanmak için 'this'
+                        this.desc1=evn.target.value;
+                },
+				descF: function(){
+				//Her derlemede çalışır yorumu aç
+				//alert();
+					this.desc2="Değişen Metin";
+					return this.desc2 + " " + this.add() + " Açıklama iki fonksiyon ile. Her işlemde çalışır ve yazıyı yeniler. Örnek alert";
+				},
+				add: function(){
+				return "\"Fonksiyon Çağırıldı\"";
+				}
+        }
+    });
+    </script>
+  </body>
+</html>

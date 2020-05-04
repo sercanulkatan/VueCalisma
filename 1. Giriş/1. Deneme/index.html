@@ -1,0 +1,38 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="exercise">
+    <p>{{Name}}</p>
+    
+    <p>{{Age*5}}</p>
+
+    <p>{{RandNumber()}}</p>
+
+	<p v-html="Img"></p>
+	
+	<img :src="ImgUrl"/>
+	
+    <div>
+        <input type="text" v-on:input="changeName" :value="Name">
+    </div>
+</div>
+
+
+<script>
+new Vue({
+	el: "#exercise",
+	data: {
+		Name:"Deneme",
+		Age:27,
+		Img: "<img src='https://images.freeimages.com/images/premium/small-comps/1653/16531137-green-maple-leaves.jpg'/>",
+		ImgUrl:"https://images.freeimages.com/images/premium/small-comps/1653/16531137-green-maple-leaves.jpg"
+	},
+	methods:{
+		RandNumber: function(){
+			return Math.random()*1;
+		},
+		changeName:function(evn){
+		this.Name=evn.target.value;
+		}
+	}
+})
+</script>
